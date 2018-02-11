@@ -76,12 +76,17 @@ public class Main {
         try(PrintWriter printWriter = new PrintWriter(file);){
             AtomicInteger count1 = new AtomicInteger(0);
             articles.forEach((a)->{
-                printWriter.print("----------------"+count1.get()+"----------------"+"\n");
-                printWriter.print(a.getArticleName()+"\n");
-                printWriter.print(a.getInformation()+"\n");
-                printWriter.print(a.getUrl()+"\n");
-                printWriter.print("\n");
-                count1.getAndIncrement();
+                if(!a.getInformation().contains("раскрепоженная") &&
+                        !a.getInformation().contains("18+") &&
+                        !a.getInformation().contains("Одес") &&
+                        !a.getInformation().contains("эскорт")) {
+                    printWriter.print("----------------" + count1.get() + "----------------" + "\n");
+                    printWriter.print(a.getArticleName() + "\n");
+                    printWriter.print(a.getInformation() + "\n");
+                    printWriter.print(a.getUrl() + "\n");
+                    printWriter.print("\n");
+                    count1.getAndIncrement();
+                }
             });
             printWriter.close();
         }catch (IOException e){}
